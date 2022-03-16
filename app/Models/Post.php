@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    const PENDING = 1;
+    const APPROVED = 2;
+    const REJECT = 3;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
