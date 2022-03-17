@@ -5,6 +5,9 @@
 /vendor
 /public/js
 /public/css
+/public/assets
+/public/mix-manifest.json
+/public/bower_components
 .env
 .env.backup
 .phpunit.result.cache
