@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('lang/{lang}', 'LanguageController@changeLanguage')->name('language');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'UserController@index')->name('home');
+
+Route::prefix('/profile')->group(function () {
+    Route::get('/', 'UserController@showProfile')->name('profile');
+    Route::put('/', 'UserController@updateProfile')->name('updateProfile');
+    Route::put('/change-password', 'UserController@changePassword')->name('changePassword');
+});

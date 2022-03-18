@@ -37,6 +37,7 @@
     <script src="{{ asset('bower_components/template_project1/assets/js/ajaxjquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/template_project1/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/template_project1/assets/js/template.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     @stack('footer')
 </body>
 
