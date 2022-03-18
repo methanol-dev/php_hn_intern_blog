@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('lang/{lang}', 'LanguageController@changeLanguage')->name('language');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
