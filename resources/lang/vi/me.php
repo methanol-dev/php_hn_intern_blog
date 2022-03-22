@@ -26,4 +26,8 @@ return [
     'new_password' => 'Mật khẩu mới',
     'confirm_password' => 'Xác nhận mật khẩu',
     'logout' => 'Đăng xuất',
+    'status' => 'Trạng thái',
+    'pending' => 'Chưa giải quyết',
+    'approved' => 'Đã xác nhận',
+    'reject' => 'Từ chối',
 ];

@@ -31,4 +31,5 @@ Route::prefix('/profile')->group(function () {
 Route::prefix('/post')->name('post.')->group(function () {
     Route::get('/create', 'PostController@create')->name('create');
     Route::post('/store', 'PostController@store')->name('store');
+    Route::get('/', 'PostController@index')->name('index');
 });
