@@ -27,3 +27,8 @@ Route::prefix('/profile')->group(function () {
     Route::put('/', 'UserController@updateProfile')->name('updateProfile');
     Route::put('/change-password', 'UserController@changePassword')->name('changePassword');
 });
+
+Route::prefix('/post')->name('post.')->group(function () {
+    Route::get('/create', 'PostController@create')->name('create');
+    Route::post('/store', 'PostController@store')->name('store');
+});

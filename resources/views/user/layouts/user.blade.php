@@ -15,7 +15,7 @@
     <!-- Bootstrap -->
 	<link href="{{ asset('bower_components/template_project1/assets/css/bootstrap.no-icons.min.css') }}" rel="stylesheet">
 	<!-- Icons -->
-	<link href="{{ asset('bower_components/template_project1/assets/css/font-awesome.css') }}" rel="stylesheet">
+	<link href="{{ asset('bower_components/Font-Awesome/css/all.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('bower_components/template_project1/assets/css/font-google.css') }}">
     <!-- Custom styles -->

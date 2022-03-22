@@ -5,8 +5,9 @@
 @endsection
 
 @push('header')
-<link href="{{ asset('bower_components/template_project1/editor/css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('bower_components/template_project1/editor/css/summernote.min.css') }}" rel="stylesheet">
+<link href="{{ asset('bower_components/template_project1/bootstrap-3.4.1/dist/css/bootstrap.min.css') }}"
+    rel="stylesheet">
+<link href="{{ asset('bower_components/template_project1/summernote/summernote.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -14,8 +15,10 @@
 <main id="main">
     <div class="container">
         <div class="card-body">
-            <form action="#" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data"
+                class="form-horizontal">
                 @csrf
+                @method('POST')
                 {{-- title --}}
                 <div class="row form-group">
                     <div class="col col-md-2"><label for="title" class=" form-control-label">{{ trans('me.title')
@@ -32,7 +35,7 @@
                     <div class="col col-md-2"><label for="file-input" class=" form-control-label">{{ trans('me.image')
                             }}</label>
                     </div>
-                    <div class="col-12 col-md-10"><input type="file" id="file-input" name="image"
+                    <div class="col-12 col-md-10"><input type="file" id="file-input" name="images"
                             class="form-control-file">
                     </div>
                 </div>
@@ -41,7 +44,7 @@
                     <div class="col col-md-2"><label for="body" class=" form-control-label">{{ trans('me.content')
                             }}</label>
                     </div>
-                    <div class="col-12 col-md-10"><textarea name="body" id="summernote" rows="9"
+                    <div class="col-12 col-md-10"><textarea name="content" id="summernote" rows="9"
                             placeholder="Content..." class="form-control"></textarea></div>
                 </div>
 
@@ -64,9 +67,9 @@
 
 @push('footer')
 
-<script src="{{ asset('bower_components/template_project1/editor/js/jquery-3.5.1.min.js') }}"></script>
-<script src="{{ asset('bower_components/template_project1/editor/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('bower_components/template_project1/editor/js/summernote.min.js') }}"></script>
-<script src="{{ asset('bower_components/template_project1/editor/js/create.js') }}"></script>
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('bower_components/template_project1/bootstrap-3.4.1/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bower_components/template_project1/summernote/summernote.min.js') }}"></script>
+<script src="{{ asset('bower_components/template_project1/summernote/create.js') }}"></script>
 
 @endpush

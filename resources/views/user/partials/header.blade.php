@@ -8,7 +8,7 @@
                 @auth
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ route('home') }}">{{ trans('me.home') }}</a></li>
-                    <li><a href="#">{{ trans('me.create') }}</a></li>
+                    <li><a href="{{ route('post.create') }}">{{ trans('me.create') }}</a></li>
                     <li><a href="{{ route('language', ['lang' => 'vi']) }}">VI</a></li>
                     <li><a href="{{ route('language', ['lang' => 'en']) }}">EN</a></li>
                     <li>
