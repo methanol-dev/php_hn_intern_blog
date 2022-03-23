@@ -14,11 +14,11 @@
                 @foreach ($posts as $post)
                 <article class="post">
                     <header class="entry-header">
-                        <h1 class="entry-title"><a href="#" rel="bookmark">{{ $post->title }}</a></h1>
+                        <h1 class="entry-title"><a href="{{ route('post.show', ['id' => $post->id]) }}" rel="bookmark">{{ $post->title }}</a></h1>
                     </header>
                     <div class="entry-content">
                         <p><img alt="" src="{{ asset('storage/post/' . $post->images) }}"></p>
-                        <p>{!! Str::limit($post->content, 200) !!}<a href="#" class="more-link">{{ trans('me.reading') }}&#8230;</a></p>
+                        <p>{!! Str::limit($post->content, 200) !!}<a href="{{ route('post.show', ['id' => $post->id]) }}" class="more-link">{{ trans('me.reading') }}&#8230;</a></p>
                     </div>
                 </article>
                 @endforeach

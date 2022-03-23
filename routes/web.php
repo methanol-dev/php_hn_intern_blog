@@ -18,8 +18,6 @@ Route::get('lang/{lang}', 'LanguageController@changeLanguage')->name('language')
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/', 'UserController@index')->name('home');
 
 Route::prefix('/profile')->group(function () {
@@ -32,4 +30,5 @@ Route::prefix('/post')->name('post.')->group(function () {
     Route::get('/create', 'PostController@create')->name('create');
     Route::post('/store', 'PostController@store')->name('store');
     Route::get('/', 'PostController@index')->name('index');
+    Route::get('/show/{id}', 'PostController@show')->name('show');
 });
