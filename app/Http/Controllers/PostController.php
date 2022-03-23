@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $user_id = Auth::id();
+        $posts = User::find($user_id)->posts()->paginate(config('constants.pagination'));
+
+        return view('user.post.index', compact('posts'));
+    }
+
     public function show($id)
     {
         return view('user.post.post');

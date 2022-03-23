@@ -26,4 +26,8 @@ return [
     'new_password' => 'New password',
     'confirm_password' => 'Confirm password',
     'logout' => 'Logout',
+    'status' => 'Status',
+    'pending' => 'Pending',
+    'approved' => 'Approved',
+    'reject' => 'Reject',
 ];
