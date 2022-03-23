@@ -11,60 +11,24 @@
         <div class="row topspace">
             <div class="col-sm-8 col-sm-offset-2">
 
+                @foreach ($posts as $post)
                 <article class="post">
                     <header class="entry-header">
-                        <div class="entry-meta">
-                            <span class="posted-on"><time class="entry-date published" date="2013-09-27">September 27,
-                                    2013</time></span>
-                        </div>
-                        <h1 class="entry-title"><a href="single.html" rel="bookmark">Hello world!</a></h1>
+                        <h1 class="entry-title"><a href="#" rel="bookmark">{{ $post->title }}</a></h1>
                     </header>
                     <div class="entry-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, molestias, architecto,
-                            adipisci, numquam dolor iusto eos reprehenderit placeat quam debitis quas magni eveniet.
-                            Saepe, nam, iste consectetur quae necessitatibus dolores provident veritatis possimus rerum
-                            facilis quia dicta itaque sapiente iusto natus quidem magni quibusdam. Explicabo nesciunt
-                            vel rem obcaecati reprehenderit eveniet culpa repudiandae. Distinctio, quia, provident illum
-                            necessitatibus repellendus rem voluptates exercitationem numquam inventore itaque atque sint
-                            nihil eveniet consequuntur eius! Laborum, at sit animi quae quidem ex tempora facilis.</p>
+                        <p><img alt="" src="{{ asset('storage/post/' . $post->images) }}"></p>
+                        <p>{!! Str::limit($post->content, 200) !!}<a href="#" class="more-link">{{ trans('me.reading') }}&#8230;</a></p>
                     </div>
                 </article>
-
-                <article class="post">
-                    <header class="entry-header">
-                        <div class="entry-meta">
-                            <span class="posted-on"><time class="entry-date published" date="2013-06-17">June 17,
-                                    2013</time></span>
-                        </div>
-                        <h1 class="entry-title"><a href="single.html" rel="bookmark">Vivamus Lacus Mauris</a></h1>
-                    </header>
-                    <div class="entry-content">
-                        <p><img alt="" src="assets/images/mac.jpg"></p>
-                        <p>Mauris eget quam orci. Quisque porta varius dui, quis posuere nibh mollis quis. Mauris
-                            commodo rhoncus porttitor. Maecenas et euismod elit. Nulla facilisi. Vivamus lacus libero,
-                            ultrices non ullamcorper ac, tempus sit amet enim. Suspendisse at semper ipsum. Suspendisse
-                            sagittis diam a massa viverra sollicitudin. Vivamus sagittis est eu diam fringilla nec
-                            tristique metus vestibulum. Donec magna purus, pellentesque vel lobortis ut, convallis id
-                            augue. Sed odio magna, pellentesque eget convallis ac, vehicula vel arcu. Sed eu scelerisque
-                            dui. Sed eu arcu at nibh hendrerit viverra. Vivamus lacus augue, sodales id cursus in,
-                            condimentum at risus. <a href="single.html" class="more-link">{{ trans('me.reading')
-                                }}&#8230;</a></p>
-                    </div>
-                </article><!-- #post-## -->
+                @endforeach
 
             </div>
         </div>
 
         <center class="">
             <ul class="pagination">
-                <li class="disabled"><a href="">&laquo;</a></li>
-                <li class="active"><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li><a href="">6</a></li>
-                <li><a href="">&raquo;</a></li>
+                {{ $posts->links() }}
             </ul>
         </center>
 
