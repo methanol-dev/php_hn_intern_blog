@@ -30,4 +30,7 @@ return [
     'pending' => 'Pending',
     'approved' => 'Approved',
     'reject' => 'Reject',
+    'author' => 'Author',
+    'results_found_for' => 'results found for',
+    'no_post' => 'No post'
 ];
