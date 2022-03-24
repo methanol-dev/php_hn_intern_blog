@@ -24,7 +24,12 @@ class PostController extends Controller
 
     public function show($id)
     {
-        return view('user.post.post');
+        $post = Post::find($id);
+        if (isset($post)) {
+            return view('user.post.show_post', compact('post'));
+        } else {
+            abort(404);
+        }
     }
 
     public function create()
