@@ -32,3 +32,5 @@ Route::prefix('/post')->name('post.')->group(function () {
     Route::get('/', 'PostController@index')->name('index');
     Route::get('/show/{id}', 'PostController@show')->name('show');
 });
+
+Route::get('/search', 'SearchController@search')->name('search');

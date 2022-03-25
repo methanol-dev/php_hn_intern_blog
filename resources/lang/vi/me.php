@@ -30,4 +30,7 @@ return [
     'pending' => 'Chưa giải quyết',
     'approved' => 'Đã xác nhận',
     'reject' => 'Từ chối',
+    'author' => 'Tác giả',
+    'results_found_for' => 'kết quả được tìm thấy cho',
+    'no_post' => 'Không có bài đăng'
 ];
