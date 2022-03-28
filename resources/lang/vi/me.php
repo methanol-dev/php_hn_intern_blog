@@ -32,5 +32,15 @@ return [
     'reject' => 'Từ chối',
     'author' => 'Tác giả',
     'results_found_for' => 'kết quả được tìm thấy cho',
-    'no_post' => 'Không có bài đăng'
+    'no_post' => 'Không có bài đăng',
+    'users' => 'Người dùng',
+    'posts' => 'Bài viết',
+    'users_table' => 'Bảng người dùng',
+    'full_name' => 'Họ tên',
+    'user_name' => 'Tên tài khoản',
+    'role' => 'Vai trò',
+    'action' => 'Hành động',
+    'admin' => 'Quản trị',
+    'block' => 'Khóa',
+    'un_block' => 'Không khóa',
 ];
