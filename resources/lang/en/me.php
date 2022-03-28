@@ -32,5 +32,15 @@ return [
     'reject' => 'Reject',
     'author' => 'Author',
     'results_found_for' => 'results found for',
-    'no_post' => 'No post'
+    'no_post' => 'No post',
+    'users' => 'Users',
+    'posts' => 'Posts',
+    'users_table' => 'Users Table',
+    'full_name' => 'Full Name',
+    'user_name' => 'User Name',
+    'role' => 'Role',
+    'action' => 'Action',
+    'admin' => 'Admin',
+    'block' => 'Block',
+    'un_block' => 'Un block',
 ];
