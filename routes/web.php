@@ -35,3 +35,4 @@ Route::prefix('/post')->name('post.')->group(function () {
 
 Route::post('/comment/{post_id}', 'CommentController@store')->name('comment.store');
 Route::post('/reply/{post_id}/{parent_id}', 'CommentController@storeReply')->name('reply.store');
+Route::get('/search', 'SearchController@search')->name('search');

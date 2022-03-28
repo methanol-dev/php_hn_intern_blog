@@ -32,4 +32,7 @@ return [
     'reject' => 'Reject',
     'login_to_comment' => 'Login to comment',
     'reply' => 'Reply',
+    'author' => 'Author',
+    'results_found_for' => 'results found for',
+    'no_post' => 'No post'
 ];
