@@ -32,3 +32,6 @@ Route::prefix('/post')->name('post.')->group(function () {
     Route::get('/', 'PostController@index')->name('index');
     Route::get('/show/{id}', 'PostController@show')->name('show');
 });
+
+Route::post('/comment/{post_id}', 'CommentController@store')->name('comment.store');
+Route::post('/reply/{post_id}/{parent_id}', 'CommentController@storeReply')->name('reply.store');

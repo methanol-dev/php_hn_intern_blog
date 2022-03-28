@@ -6,4 +6,5 @@ return [
     'pending' => 1,
     'approved' => 2,
     'reject' => 3,
+    'simple_pagi' => 3,
 ];

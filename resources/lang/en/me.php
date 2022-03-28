@@ -30,4 +30,6 @@ return [
     'pending' => 'Pending',
     'approved' => 'Approved',
     'reject' => 'Reject',
+    'login_to_comment' => 'Login to comment',
+    'reply' => 'Reply',
 ];

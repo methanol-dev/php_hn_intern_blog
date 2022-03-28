@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -24,12 +25,14 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::find($id);
-        if (isset($post)) {
-            return view('user.post.show_post', compact('post'));
-        } else {
-            abort(404);
-        }
+        $post = Post::findOrFail($id);
+        $comments = Post::findOrFail($id)
+            ->comments()
+            ->with('user', 'getChilComment')
+            ->orderBy('comments.created_at', 'DESC')
+            ->simplePaginate(config('constants.simple_pagi'));
+
+        return view('user.post.show_post', compact('post', 'comments'));
     }
 
     public function create()
