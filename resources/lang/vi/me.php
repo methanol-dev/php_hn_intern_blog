@@ -43,4 +43,5 @@ return [
     'admin' => 'Quản trị',
     'block' => 'Khóa',
     'un_block' => 'Không khóa',
+    'change_status' => 'Thay đổi trạng thái',
 ];

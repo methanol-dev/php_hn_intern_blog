@@ -35,4 +35,8 @@ Route::prefix('/post')->name('post.')->group(function () {
 
 Route::get('/search', 'SearchController@search')->name('search');
 
-Route::get('/admin', 'AdminController@index')->middleware(['auth', 'admin'])->name('admin.index');
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', 'AdminController@index')->name('index');
+    Route::get('/update/{id}', 'AdminController@edit')->name('edit');
+    Route::put('/update/{id}', 'AdminController@update')->name('update');
+});

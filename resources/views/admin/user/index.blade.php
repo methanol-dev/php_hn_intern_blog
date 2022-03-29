@@ -37,15 +37,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($users as $index => $user)
                                     <tr>
-                                        <th>1</th>
+                                        <th>{{ ++$index }}</th>
                                         <td>{{ $user->full_name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->role->name }}</td>
                                         <td>{{ $user->status ? trans('me.block') : trans('me.un_block') }}</td>
-                                        <td><i class="fa fa-list"></i></td>
+                                        <td><a href="{{ Route('admin.edit', ['id' => $user->id]) }}"><i class="fa fa-pen"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
