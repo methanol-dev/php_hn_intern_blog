@@ -10,6 +10,15 @@ class Post extends Model
     const APPROVED = 2;
     const REJECT = 3;
 
+    protected $fillable = [
+        'title',
+        'user_id',
+        'slug',
+        'images',
+        'content',
+        'status',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

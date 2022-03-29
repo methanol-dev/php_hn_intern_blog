@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ Route('admin.post.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             {{ trans('me.posts') }}

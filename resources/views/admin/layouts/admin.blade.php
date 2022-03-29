@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/dist/css/adminlte.min.css') }}">
+    @stack('header')
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -38,6 +39,7 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('footer')
 </body>
 
 </html>
