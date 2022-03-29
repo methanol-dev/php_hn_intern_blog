@@ -30,6 +30,8 @@ return [
     'pending' => 'Chưa giải quyết',
     'approved' => 'Đã xác nhận',
     'reject' => 'Từ chối',
+    'login_to_comment' => 'Đăng nhập để bình luận',
+    'reply' => 'Trả Lời',
     'author' => 'Tác giả',
     'results_found_for' => 'kết quả được tìm thấy cho',
     'no_post' => 'Không có bài đăng',
