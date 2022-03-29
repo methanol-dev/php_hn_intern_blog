@@ -13,4 +13,20 @@ class AdminController extends Controller
 
         return view('admin.user.index', compact('users'));
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin.user.update', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = $request->status;
+        $user->save();
+
+        return redirect()->back();
+    }
 }

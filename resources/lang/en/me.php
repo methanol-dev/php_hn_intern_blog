@@ -45,4 +45,5 @@ return [
     'admin' => 'Admin',
     'block' => 'Block',
     'un_block' => 'Un block',
+    'change_status' => 'Change status',
 ];
