@@ -16,12 +16,12 @@
                 @foreach ($results as $result)
                 <article class="post">
                     <header class="entry-header">
-                        <h1 class="entry-title"><a href="#" rel="bookmark">{{ $result->title }}</a></h1>
+                        <h1 class="entry-title"><a href="{{ route('post.show', ['id' => $result->id]) }}" rel="bookmark">{{ $result->title }}</a></h1>
                         <h2 class="entry-title">{{ trans('me.author') . ": " }}{{ $result->full_name }}</h2>
                     </header>
                     <div class="entry-content">
                         <p><img alt="" src="{{ asset('storage/post/' . $result->images) }}"></p>
-                        <p>{!! Str::limit($result->content, 200) !!}<a href="#" class="more-link">{{ trans('me.reading')
+                        <p>{!! Str::limit($result->content, 200) !!}<a href="{{ route('post.show', ['id' => $result->id]) }}" class="more-link">{{ trans('me.reading')
                                 }}&#8230;</a></p>
                     </div>
                 </article>

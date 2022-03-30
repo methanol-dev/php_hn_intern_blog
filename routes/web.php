@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,13 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
     Route::get('/', 'AdminController@index')->name('index');
     Route::get('/update/{id}', 'AdminController@edit')->name('edit');
     Route::put('/update/{id}', 'AdminController@update')->name('update');
+    Route::prefix('/post')->name('post.')->group(function () {
+        Route::get('/', 'AdminPostController@index')->name('index');
+        Route::get('/create', 'AdminPostController@create')->name('create');
+        Route::post('/store', 'AdminPostController@store')->name('store');
+        Route::get('/show/{id}', 'AdminPostController@show')->name('show');
+        Route::get('/edit/{id}', 'AdminPostController@edit')->name('edit');
+        Route::put('/update/{id}', 'AdminPostController@update')->name('update');
+        Route::delete('/destroy/{id}', 'AdminPostController@destroy')->name('destroy');
+    });
 });
