@@ -22,7 +22,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ route('profile', ['id' => Auth::user()->id]) }}">{{
                                     trans('me.profile') }}</a>
-                                <button id="logout">{{ trans('me.logout') }}</button>
+                                <a id="logout">{{ trans('me.logout') }}</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
                                 </form>

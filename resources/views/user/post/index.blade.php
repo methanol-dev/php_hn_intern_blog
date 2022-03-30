@@ -14,6 +14,7 @@
                     <th scope="col">#</th>
                     <th scope="col">{{ trans('me.title') }}</th>
                     <th scope="col">{{ trans('me.status') }}</th>
+                    <th scope="col">{{ trans('me.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,21 +28,41 @@
                     <td>
                         @switch ($post->status)
                             @case (config('constants.pending'))
-                                {{ trans('me.pending') }}
-                                @break
+                            {{ trans('me.pending') }}
+                            @break
                             @case (config('constants.approved'))
-                                {{ trans('me.approved') }}
-                                @break
+                            {{ trans('me.approved') }}
+                            @break
                             @case (config('constants.reject'))
-                                {{ trans('me.reject') }}
-                                @break
+                            {{ trans('me.reject') }}
+                            @break
                         @endswitch
+                    </td>
+                    <td>
+                        <button>
+                            <a href="{{ route('post.show', ['id' => $post->id]) }}">
+                                {{ 'show' }}
+                            </a>
+                        </button>
+                        <button>
+                            <a href="{{ route('post.edit', ['id' => $post->id]) }}">
+                                {{ 'edit' }}
+                            </a>
+                        </button>
+                        <form action="{{ route('post.destroy', ['id' => $post->id]) }}" method="post" class="d-inline"
+                            onsubmit="return confirm('{{ trans('Delete') }}?')">
+                            @csrf
+                            @method('DELETE')
+                            <button>
+                                {{ 'delete' }}
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
-            {{ $posts->links() }}
         </table>
+        {{ $posts->links() }}
     </div>
 </main>
 

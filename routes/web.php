@@ -32,6 +32,9 @@ Route::prefix('/post')->name('post.')->group(function () {
     Route::post('/store', 'PostController@store')->name('store');
     Route::get('/', 'PostController@index')->name('index');
     Route::get('/show/{id}', 'PostController@show')->name('show');
+    Route::get('/edit/{id}', 'PostController@edit')->name('edit');
+    Route::put('/update/{id}', 'PostController@update')->name('update');
+    Route::delete('destroy/{id}', 'PostController@destroy')->name('destroy');
 });
 
 Route::post('/comment/{post_id}', 'CommentController@store')->name('comment.store');
