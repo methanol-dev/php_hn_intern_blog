@@ -170,4 +170,29 @@ class AdminPostController extends Controller
 
         return redirect()->route('admin.post.index');
     }
+
+    public function approval()
+    {
+        $posts = Post::where('status', Post::PENDING)
+            ->orderByDesc('created_at')
+            ->paginate(config('constants.pagination'));
+
+        return view('admin.post.approval', compact('posts'));
+    }
+
+    public function eidtApproval($id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('admin.post.edit_approval', compact('post'));
+    }
+
+    public function updateApproval(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->status = $request->status;
+        $post->save();
+
+        return redirect()->route('admin.post.approval');
+    }
 }

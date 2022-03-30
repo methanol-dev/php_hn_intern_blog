@@ -53,5 +53,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::get('/edit/{id}', 'AdminPostController@edit')->name('edit');
         Route::put('/update/{id}', 'AdminPostController@update')->name('update');
         Route::delete('/destroy/{id}', 'AdminPostController@destroy')->name('destroy');
+        Route::get('/approval', 'AdminPostController@approval')->name('approval');
+        Route::get('/approval/edit/{id}', 'AdminPostController@eidtApproval')->name('edit.approval');
+        Route::put('/approval/update/{id}', 'AdminPostController@updateApproval')->name('update.approval');
     });
 });
