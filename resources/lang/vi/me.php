@@ -46,4 +46,5 @@ return [
     'block' => 'Khóa',
     'un_block' => 'Không khóa',
     'change_status' => 'Thay đổi trạng thái',
+    'post_approval' => 'Phê duyệt bài viết',
 ];

@@ -30,6 +30,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ Route('admin.post.approval') }}" class="nav-link">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>
+                            {{ trans('me.post_approval') }}
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -21,7 +21,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderByDesc('created_at')->paginate(config('constants.pagination'));
+        $posts = Post::where('status', Post::APPROVED)
+            ->orderByDesc('created_at')
+            ->paginate(config('constants.pagination'));
 
         return view('user.index', compact('posts'));
     }
