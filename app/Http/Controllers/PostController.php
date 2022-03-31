@@ -30,6 +30,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $comments = Post::findOrFail($id)
             ->comments()
+            ->where('parent_id', null)
             ->with('user', 'getChilComment')
             ->orderBy('comments.created_at', 'DESC')
             ->simplePaginate(config('constants.simple_pagi'));

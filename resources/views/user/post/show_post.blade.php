@@ -39,8 +39,8 @@
                     @foreach ($comments as $comment)
 
                     <ol class="comments-list">
-                        <li class="comment" id="comment">
-                            <div>
+                        <li class="comment" id="comment-{{ $comment->id }}">
+                            <div class="parent-comment" id="parent-comment-{{ $comment->id }}">
                                 <img src="{{ asset('storage/user/' . optional($comment->user)->avatar) }}" alt="Avatar"
                                     class="avatar">
 
@@ -48,8 +48,14 @@
                                     <span class="author">{{ optional($comment->user)->full_name
                                         }}</span>
                                     <span class="date">{{ $comment->created_at }}</span>
-                                    <span class="reply" id="reply-{{ $comment->id }}" data-id="{{ $comment->id }}">{{
+                                    <span class="reply" data-id="{{ $comment->id }}">{{
                                         trans('me.reply')
+                                        }}</span>
+                                    <span class="edit" data-id="{{ $comment->id }}">{{
+                                        trans('me.edit')
+                                        }}</span>
+                                    <span class="delete" data-id="{{ $comment->id }}">{{
+                                        trans('me.delete')
                                         }}</span>
                                 </div>
 
@@ -57,10 +63,31 @@
                                     {{ $comment->content }}
                                 </div>
                             </div>
+
+                            <div class="eidt-parent-comment" id="edit-parent-comment-{{ $comment->id }}">
+                                <form action="{{ route('comment.update', ['id' => $comment->id]) }}" method="post"
+                                    id="commentform">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group">
+                                        <label for="inputComment">{{ trans('me.comment') }}</label>
+                                        <textarea class="form-control" rows="6" name="content"
+                                            id="content">{{ $comment->content }}</textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <button type="submit" class="btn btn-action">{{ trans('me.submit')
+                                                }}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <ul class="children">
                                 @foreach ($comment->getChilComment as $chilComment)
-                                <li class="comment">
-                                    <div>
+                                <li class="comment" id="comment-reply-{{ $chilComment->id }}">
+                                    <div class="children-comment" id="children-comment-{{ $chilComment->id }}">
                                         <img src="{{ asset('storage/user/' . optional($chilComment->user)->avatar) }}"
                                             alt="Avatar" class="avatar">
 
@@ -68,19 +95,46 @@
                                             <span class="author">{{ optional($chilComment->user)->full_name
                                                 }}</span>
                                             <span class="date">{{ $chilComment->created_at }}</span>
+                                            <span class="edit-reply" data-id="{{ $chilComment->id }}">{{
+                                                trans('me.edit')
+                                                }}</span>
+                                            <span class="delete-reply" data-id="{{ $chilComment->id }}">{{
+                                                trans('me.delete')
+                                                }}</span>
                                         </div><!-- .comment-meta -->
 
                                         <div class="comment-body">
                                             {{ $chilComment->content }}
                                         </div><!-- .comment-body -->
                                     </div>
+                                    <div class="eidt-children-comment"
+                                        id="eidt-children-comment-{{ $chilComment->id }}">
+                                        <form action="{{ route('comment.update', ['id' => $chilComment->id,]) }}"
+                                            method="post" id="commentform">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <label for="inputComment">{{ trans('me.comment') }}</label>
+                                                <textarea class="form-control" rows="6"
+                                                    name="content">{{ $chilComment->content }}</textarea>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    <button type="submit" class="btn btn-action">{{ trans('me.submit')
+                                                        }}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </li>
                                 @endforeach
                                 <div id="reply-commentform-{{ $comment->id }}" class="reply-commentform">
                                     <form action="{{ route('reply.store', [
-                                        'post_id' => $post->id,
-                                        'parent_id' => $comment->id
-                                    ]) }}" method="post" id="commentform" class="">
+                                            'post_id' => $post->id,
+                                            'parent_id' => $comment->id
+                                        ]) }}" method="post" id="commentform" class="">
                                         @csrf
                                         @method('POST')
                                         <div class="form-group">
@@ -94,6 +148,8 @@
                                                 <button type="submit" class="btn btn-action">{{ trans('me.submit')
                                                     }}</button>
                                             </div>
+
+                                        </div>
                                     </form>
                                 </div> <!-- /respond -->
                             </ul><!-- .children -->
@@ -116,7 +172,7 @@
                             @method('POST')
                             <div class="form-group">
                                 <label for="inputComment">{{ trans('me.comment') }}</label>
-                                <textarea class="form-control" rows="6" name="content"></textarea>
+                                <textarea class="form-control" rows="6" name="content" id="content"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
