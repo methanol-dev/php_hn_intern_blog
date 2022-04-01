@@ -37,8 +37,17 @@ Route::prefix('/post')->name('post.')->group(function () {
     Route::delete('destroy/{id}', 'PostController@destroy')->name('destroy');
 });
 
-Route::post('/comment/{post_id}', 'CommentController@store')->name('comment.store');
-Route::post('/reply/{post_id}/{parent_id}', 'CommentController@storeReply')->name('reply.store');
+Route::prefix('/comment')->name('comment.')->group(function () {
+    Route::post('/store/{post_id}', 'CommentController@store')->name('store');
+    Route::delete('/delete/{id}', 'CommentController@destroy')->name('destroy');
+    Route::put('/update/{id}', 'CommentController@update')->name('update');
+});
+
+Route::prefix('/reply')->name('reply.')->group(function () {
+    Route::post('/store/{post_id}/{parent_id}', 'CommentController@storeReply')->name('store');
+    Route::delete('/delete/{id}', 'CommentController@destroyReply')->name('destroy');
+});
+
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
