@@ -19,7 +19,7 @@ Route::get('lang/{lang}', 'LanguageController@changeLanguage')->name('language')
 
 Auth::routes();
 
-Route::get('/', 'UserController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('/profile')->group(function () {
     Route::get('/', 'UserController@showProfile')->name('profile');

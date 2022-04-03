@@ -35,7 +35,7 @@ class PostController extends Controller
             ->orderBy('comments.created_at', 'DESC')
             ->simplePaginate(config('constants.simple_pagi'));
 
-        return view('user.post.show_post', compact('post', 'comments'));
+        return view('update_ui.post.show', compact('post', 'comments'));
     }
 
     public function create()
