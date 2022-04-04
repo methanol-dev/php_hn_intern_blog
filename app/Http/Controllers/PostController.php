@@ -20,9 +20,9 @@ class PostController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        $posts = User::find($user_id)->posts()->paginate(config('constants.pagination'));
+        $posts = User::find($user_id)->posts()->orderByDesc('created_at')->paginate(config('constants.pagination'));
 
-        return view('user.post.index', compact('posts'));
+        return view('update_ui.post.index', compact('posts'));
     }
 
     public function show($id)
@@ -40,7 +40,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('user.post.create_post');
+        return view('update_ui.post.create');
     }
 
     public function store(StorePostRequest $request)
@@ -77,7 +77,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('user.post.update', compact('post'));
+        return view('update_ui.post.update', compact('post'));
     }
 
     public function update(UpdatePostRequest $request, $id)

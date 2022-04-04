@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', Post::PENDING)
+        $posts = Post::where('status', Post::APPROVED)
             ->orderByDesc('created_at')
             ->paginate(config('constants.pagination'));
 

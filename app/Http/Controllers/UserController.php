@@ -95,7 +95,7 @@ class UserController extends Controller
 
     public function showProfile()
     {
-        return view('user.profile');
+        return view('update_ui.profile');
     }
 
     public function updateProfile(UpdateProfileRequest $request)
@@ -125,7 +125,7 @@ class UserController extends Controller
         $user->avatar = $avatarName;
         $user->save();
 
-        return redirect()->route('profile');
+        return redirect()->back();
     }
 
     public function changePassword(ChangePasswordRequest $request)
@@ -143,7 +143,7 @@ class UserController extends Controller
                 return redirect()->route('profile');
             }
         } else {
-            return redirect()->route('profile');
+            return redirect()->back();
         }
     }
 }

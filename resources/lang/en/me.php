@@ -49,4 +49,5 @@ return [
     'post_approval' => 'Post approval',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'show' => 'Show',
 ];

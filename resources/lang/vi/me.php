@@ -49,4 +49,5 @@ return [
     'post_approval' => 'Phê duyệt bài viết',
     'edit' => 'Sửa',
     'delete' => 'Xóa',
+    'show' => 'Xem',
 ];
