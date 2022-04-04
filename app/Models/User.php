@@ -55,7 +55,7 @@ class User extends Authenticatable
     }
 
     // add Accessors
-    protected $appends = [
+    public $appends = [
         'full_name',
     ];
 
