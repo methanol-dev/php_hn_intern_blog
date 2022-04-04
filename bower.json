@@ -19,6 +19,7 @@
     "Font-Awesome": "^6.1.0",
     "bootstrap": "^5.1.3",
     "template_project1": "https://github.com/methanol-dev/template_project1.git",
-    "admin-lte": "^3.2.0"
+    "admin-lte": "^3.2.0",
+    "tech_blog_template": "https://github.com/methanol-dev/tech_blog_template.git"
   }
 }
