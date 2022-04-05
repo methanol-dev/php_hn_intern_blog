@@ -9,50 +9,48 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreReplyRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Repositories\Comment\CommentRepositoryInterface;
 
 class CommentController extends Controller
 {
+    protected $commentRepo;
+
+    public function __construct(CommentRepositoryInterface $commentRepo)
+    {
+        $this->commentRepo = $commentRepo;
+    }
+
     public function store(StoreCommentRequest $request, $post_id)
     {
-        Comment::create([
-            'post_id' => $post_id,
-            'user_id' => Auth::id(),
-            'content' => $request->content,
-        ]);
+        $data = $request->all();
+        $this->commentRepo->createComment($data, $post_id);
 
         return redirect()->route('post.show', ['id' => $post_id]);
     }
 
     public function storeReply(StoreReplyRequest $request, $post_id, $paren_id)
     {
-        Comment::create([
-            'post_id' => $post_id,
-            'user_id' => Auth::id(),
-            'parent_id' => $paren_id,
-            'content' => $request->content,
-        ]);
+        $data = $request->all();
+        $this->commentRepo->createReplyComment($data, $post_id, $paren_id);
 
         return redirect()->route('post.show', ['id' => $post_id]);
     }
 
     public function update(UpdateCommentRequest $request, $id)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->content = $request->content;
-        $comment->save();
+        $data = $request->all();
+        $this->commentRepo->update($id, $data);
 
         return redirect()->back();
     }
 
     public function destroy($id)
     {
-        $comment = Comment::findOrFail($id);
-
         try {
             DB::beginTransaction();
 
-            $comment->getChilComment()->delete();
-            $comment->delete();
+            $this->commentRepo->deleteReply($id);
+            $this->commentRepo->delete($id);
 
             DB::commit();
         } catch (\Throwable $th) {
@@ -68,8 +66,7 @@ class CommentController extends Controller
 
     public function destroyReply($id)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->delete();
+        $this->commentRepo->delete($id);
 
         return response()->json([
             'status' => 200,
