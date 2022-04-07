@@ -56,12 +56,14 @@ class CommentController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            throw $th;
+            return response()->json([
+                'status' => 500,
+            ], 500);
         }
 
         return response()->json([
             'status' => 200,
-        ]);
+        ], 200);
     }
 
     public function destroyReply($id)
@@ -70,6 +72,6 @@ class CommentController extends Controller
 
         return response()->json([
             'status' => 200,
-        ]);
+        ], 200);
     }
 }
