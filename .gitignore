@@ -9,6 +9,7 @@
 /public/mix-manifest.json
 /public/bower_components
 /coverage
+/tests/Brower/console
 .env
 .env.backup
 .phpunit.result.cache
