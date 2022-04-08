@@ -58,18 +58,18 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.post.show', ['id' => $post->id]) }}"
-                                        class="btn btn-info m-2">
+                                        class="btn btn-info m-2" id="show-{{ $post->id }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
                                     <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}"
-                                        class="btn btn-primary m-2">
+                                        class="btn btn-primary m-2" id="edit-{{ $post->id }}">
                                         <i class="fa fa-pen" aria-hidden="true"></i>
                                     </a>
                                     <form action="{{ route('admin.post.destroy', ['id' => $post->id]) }}" method="post"
                                         class="d-inline" onsubmit="return confirm('{{ trans('Delete') }}?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger m-2">
+                                        <button class="btn btn-danger m-2" id="delete-{{ $post->id }}">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </form>
