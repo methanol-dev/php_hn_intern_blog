@@ -50,4 +50,9 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'show' => 'Show',
+    'member_login' => 'Member Login',
+    'password' => 'Password',
+    'forgot_password' => 'Forgot Password',
+    'create_your_account' => 'Create your Account',
+    'password_confirm' => 'Password Confirm',
 ];

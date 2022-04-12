@@ -50,4 +50,9 @@ return [
     'edit' => 'Sửa',
     'delete' => 'Xóa',
     'show' => 'Xem',
+    'member_login' => 'Đăng nhập thành viên',
+    'password' => 'Mật khẩu',
+    'forgot_password' => 'Quên mật khẩu',
+    'create_your_account' => 'Tạo tài khoản của bạn',
+    'password_confirm' => 'Xác nhận mật khẩu',
 ];
