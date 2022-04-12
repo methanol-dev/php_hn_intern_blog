@@ -55,4 +55,5 @@ return [
     'forgot_password' => 'Forgot Password',
     'create_your_account' => 'Create your Account',
     'password_confirm' => 'Password Confirm',
+    'post_statistics' => 'Post Statistics',
 ];

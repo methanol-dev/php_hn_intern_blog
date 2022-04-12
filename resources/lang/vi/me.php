@@ -55,4 +55,5 @@ return [
     'forgot_password' => 'Quên mật khẩu',
     'create_your_account' => 'Tạo tài khoản của bạn',
     'password_confirm' => 'Xác nhận mật khẩu',
+    'post_statistics' => 'Thống kê bài viết',
 ];
