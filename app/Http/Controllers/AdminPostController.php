@@ -195,4 +195,20 @@ class AdminPostController extends Controller
 
         return redirect()->route('admin.post.approval');
     }
+
+    public function statistics()
+    {
+        $year = Carbon::now()->year;
+        $posts = Post::where('created_at', 'like', "%" . $year . "%")->get();
+
+        $dates = $posts->map(function ($post, $index) {
+            return $post->created_at->format('M');
+        });
+
+        $initChart = config('constants.init_chart');
+
+        $results = json_encode(array_merge($initChart, array_count_values($dates->toArray())));
+
+        return view('admin.post.post_statistics', compact('results'));
+    }
 }
