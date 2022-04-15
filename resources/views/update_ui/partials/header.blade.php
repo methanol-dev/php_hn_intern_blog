@@ -29,7 +29,61 @@
                         <a class="nav-link" href="{{  route('language', ['lang' => 'en']) }}">EN</i></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <span class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-user"></i></span>
+                        <a class="nav-link text-light" href="#" id="notification" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+
+                            @if (auth()->user()->unreadNotifications->count() > 0)
+                            <span class="pending badge bg-primary badge-number">{{
+                                auth()->user()->unreadNotifications->count() }}</span>
+                            @endif
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <a href="" class="float-right text-light" id="readall">{{ trans('me.mark_all_as_read') }}</a>
+                                    </div>
+                            </li>
+
+                            <ul class="notification-box" id="show-notification">
+                                @foreach (Auth::user()->notifications as $notification)
+                                <a href="{{ route('post.show', ['id' => $notification->data['id']]) }}">
+                                    <li class="notification-box bg-gray box-noti {{ $notification->read_at ? 'read' : '' }}"
+                                        data-id="{{ $notification->id }}">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12 col-12">
+                                                <div class="box">
+                                                    {{ trans('me.post') . ' ' . $notification->data['title'] . ' ' .
+                                                    trans('me.has_been') . ' '}}
+                                                    @switch ($notification->data['status'])
+                                                        @case (config('constants.pending'))
+                                                        {{ trans('me.pending') }}
+                                                        @break
+                                                        @case (config('constants.approved'))
+                                                        {{ trans('me.approved') }}
+                                                        @break
+                                                        @case (config('constants.reject'))
+                                                        {{ trans('me.reject') }}
+                                                        @break
+                                                    @endswitch
+                                                </div>
+                                                <small class="text-warning box">{{
+                                                    $notification->created_at->diffForHumans()
+                                                    }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </a>
+                                @endforeach
+                            </ul>
+
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <span class="nav-link" data-toggle="dropdown"><i class="fa fa-user"></i></span>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('profile') }}">{{ trans('me.profile') }}</a></li>
                             <li><a id="logout">{{ trans('me.logout') }}</a>

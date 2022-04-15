@@ -65,11 +65,19 @@
 
     <!-- Core JavaScript
     ================================================== -->
+    <script>
+        window.translations = {!! $translation !!};
+    </script>
     <script src="{{ asset('bower_components/tech_blog_template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('bower_components/tech_blog_template/js/tether.min.js') }}"></script>
     <script src="{{ asset('bower_components/tech_blog_template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/tech_blog_template/js/custom.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        if({{ Auth::check() }}){
+            window.user = {{ Auth::id() }};
+        }
+    </script>
     @stack('footer')
 
 </body>

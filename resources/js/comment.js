@@ -1,5 +1,5 @@
-$(document).ready(function (){
-    $('.reply').click(function (e){
+$(document).ready(function () {
+    $('.reply').click(function (e) {
         let id = $(this).attr('data-id');
         $('.reply-commentform').css('display', 'none');
         $('#reply-commentform-' + id).css('display', 'block');
@@ -13,7 +13,7 @@ $(document).ready(function (){
             },
             type: "DELETE",
             url: "/comment/delete/" + id,
-            data: {id: id},
+            data: { id: id },
             success: function () {
                 $("#comment-" + id).remove();
             }
@@ -28,7 +28,7 @@ $(document).ready(function (){
             },
             type: "DELETE",
             url: "/reply/delete/" + id,
-            data: {id: id},
+            data: { id: id },
             success: function () {
                 $("#children-" + id).remove();
             }
@@ -37,7 +37,7 @@ $(document).ready(function (){
 
     $('.edit').click(function (e) {
         let id = $(this).attr('data-id');
-        $("#parent-comment-" + id ).remove();
+        $("#parent-comment-" + id).remove();
         $('.eidt-parent-comment').css('display', 'none');
         $("#edit-parent-comment-" + id).css('display', 'block');
     });
@@ -45,9 +45,8 @@ $(document).ready(function (){
     $('.edit-reply').click(function (e) {
         let id_chil = $(this).attr('data-id');
 
-        $("#children-comment-" + id_chil ).remove();
+        $("#children-comment-" + id_chil).remove();
         $('.eidt-children-comment').css('display', 'none');
         $("#eidt-children-comment-" + id_chil).css('display', 'block');
     });
 });
-

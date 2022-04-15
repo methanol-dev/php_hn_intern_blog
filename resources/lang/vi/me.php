@@ -28,7 +28,7 @@ return [
     'logout' => 'Đăng xuất',
     'status' => 'Trạng thái',
     'pending' => 'Chưa giải quyết',
-    'approved' => 'Đã xác nhận',
+    'approved' => 'Đã chấp nhận',
     'reject' => 'Từ chối',
     'login_to_comment' => 'Đăng nhập để bình luận',
     'reply' => 'Trả Lời',
@@ -56,4 +56,7 @@ return [
     'create_your_account' => 'Tạo tài khoản của bạn',
     'password_confirm' => 'Xác nhận mật khẩu',
     'post_statistics' => 'Thống kê bài viết',
+    'recent' => 'Gần đây',
+    'has_been' => 'đã được',
+    'mark_all_as_read' => 'Đánh dấu tất cả đã đọc',
 ];

@@ -56,4 +56,7 @@ return [
     'create_your_account' => 'Create your Account',
     'password_confirm' => 'Password Confirm',
     'post_statistics' => 'Post Statistics',
+    'recent' => 'Recent',
+    'has_been' => 'has been',
+    'mark_all_as_read' => 'Mark all as read',
 ];

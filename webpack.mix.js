@@ -12,10 +12,11 @@ const mix = require('laravel-mix');
  */
 
 mix.js([
-    'resources/js/comment.js',
-    'resources/js/logout.js',
-    'resources/js/app.js',
-    'resources/js/chart.js',
-], 'public/js/app.js')
+        'resources/js/notification.js',
+        'resources/js/comment.js',
+        'resources/js/app.js',
+        'resources/js/logout.js',
+        'resources/js/chart.js',
+    ], 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css')
     .postCss('resources/css/style.css', 'public/css/style.css');

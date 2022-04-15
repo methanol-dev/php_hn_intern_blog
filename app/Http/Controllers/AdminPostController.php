@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ApprovedNotificationEvent;
+use Pusher\Pusher;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -10,8 +12,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\StorePostRequest;
+use App\Notifications\PostNotification;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Notification;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AdminPostController extends Controller
 {
@@ -193,6 +198,22 @@ class AdminPostController extends Controller
         $post->status = $request->status;
         $post->save();
 
+        $data = [
+            'id' => $post->id,
+            'title' => $post->title,
+            'status' => $post->status,
+            'created_at' => $post->created_at,
+        ];
+
+        $user = $post->user;
+        $user->notify(new PostNotification($data));
+
+        $notification_id = $user->notifications->first()->id;
+
+        $data['notification_id'] = $notification_id;
+
+        event(new ApprovedNotificationEvent($data, $user->id));
+
         return redirect()->route('admin.post.approval');
     }
 
@@ -210,5 +231,35 @@ class AdminPostController extends Controller
         $results = json_encode(array_merge($initChart, array_count_values($dates->toArray())));
 
         return view('admin.post.post_statistics', compact('results'));
+    }
+
+    public function readNotification($id)
+    {
+        try {
+            Auth::user()->Notifications->find($id)->markAsRead();
+        } catch (\Exception $th) {
+            return response()->json([
+                'mess' => $th,
+            ], 500);
+        }
+
+        return response()->json([
+            'mess' => 'success',
+        ], 200);
+    }
+
+    public function readAllNotification()
+    {
+        try {
+            Auth::user()->Notifications->markAsRead();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'mess' => 'fail',
+            ], 500);
+        }
+
+        return response()->json([
+            'mess' => 'success',
+        ], 200);
     }
 }
