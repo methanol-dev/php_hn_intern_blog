@@ -68,3 +68,6 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(fu
         Route::get('/statistics', 'AdminPostController@statistics')->name('statistics');
     });
 });
+
+Route::put('/notification/read/{id}', 'AdminPostController@readNotification')->name('read.notification');
+Route::put('/notification/readall', 'AdminPostController@readAllNotification')->name('readall.notification');
