@@ -2,11 +2,18 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\SendMailController;
+use App\Mail\Report;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\SendMailController;
+use App\Repositories\Post\PostRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 
 class CronEmail extends Command
 {
+    protected $postRepo;
+    protected $userRepo;
+
     /**
      * The name and signature of the console command.
      *
@@ -26,9 +33,11 @@ class CronEmail extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PostRepositoryInterface $postRepo, UserRepositoryInterface $userRepo)
     {
         parent::__construct();
+        $this->postRepo = $postRepo;
+        $this->userRepo = $userRepo;
     }
 
     /**
@@ -38,7 +47,14 @@ class CronEmail extends Command
      */
     public function handle()
     {
-        $email = new SendMailController();
-        $email->sendMail();
+        $users = $this->userRepo->getUserIsAdmin();
+        $posts = $this->postRepo->getPostPending();
+
+        foreach ($users as $user) {
+            $mailable = new Report($user, $posts);
+            Mail::to($user)->queue($mailable);
+        }
+
+        return true;
     }
 }
