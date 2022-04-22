@@ -16,7 +16,7 @@ use App\Notifications\PostNotification;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Notification;
-use PhpParser\Node\Stmt\TryCatch;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminPostController extends Controller
 {
@@ -185,13 +185,6 @@ class AdminPostController extends Controller
         return view('admin.post.approval', compact('posts'));
     }
 
-    public function eidtApproval($id)
-    {
-        $post = Post::findOrFail($id);
-
-        return view('admin.post.edit_approval', compact('post'));
-    }
-
     public function updateApproval(Request $request, $id)
     {
         $post = Post::findOrFail($id);
@@ -213,6 +206,12 @@ class AdminPostController extends Controller
         $data['notification_id'] = $notification_id;
 
         event(new ApprovedNotificationEvent($data, $user->id));
+
+        if ($post->status == Post::APPROVED) {
+            Alert::alert()->success('Post Approved', 'Successfully');
+        } else {
+            Alert::alert()->success('Post Rejected', 'Successfully');
+        }
 
         return redirect()->route('admin.post.approval');
     }

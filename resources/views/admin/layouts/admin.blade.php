@@ -38,6 +38,7 @@
     <script src="{{ asset('bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
+    @include('sweetalert::alert')
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('footer')
 </body>

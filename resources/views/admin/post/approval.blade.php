@@ -53,10 +53,24 @@
                                     @endswitch
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.post.edit.approval', ['id' => $post->id]) }}"
-                                        class="btn btn-primary m-2">
-                                        <i class="fa fa-pen" aria-hidden="true"></i>
-                                    </a>
+                                    <form action="{{ route('admin.post.update.approval', ['id' => $post->id]) }}" method="post"
+                                        class="d-inline" onsubmit="return confirm('{{ trans('Approved') }}?')">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" value="{{ config('constants.approved') }}" name="status">
+                                        <button class="btn btn-success m-2" id="approved-{{ $post->id }}">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.post.update.approval', ['id' => $post->id]) }}" method="post"
+                                        class="d-inline" onsubmit="return confirm('{{ trans('Rejected') }}?')">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" value="{{ config('constants.reject') }}" name="status">
+                                        <button class="btn btn-danger m-2" id="rejected-{{ $post->id }}">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
