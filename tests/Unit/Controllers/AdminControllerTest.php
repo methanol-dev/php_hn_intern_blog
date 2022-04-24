@@ -52,19 +52,6 @@ class AdminControllerTest extends TestCase
         $this->assertEquals('admin.user.index', $view->getName());
     }
 
-    public function testMethodEdit()
-    {
-        $user = $this->users->first();
-        $user->id = rand();
-
-        $this->adminRepo->shouldReceive('findOrFail')->with($user->id)->andReturn($user);
-
-        $view = $this->adminController->edit($user->id);
-
-        $this->assertInstanceOf(View::class, $view);
-        $this->assertEquals('admin.user.update', $view->getName());
-    }
-
     public function testMethodUpdateFail()
     {
         $exception = new Exception();

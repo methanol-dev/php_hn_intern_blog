@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\UpdateUserRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Repositories\Admin\AdminRepositoryInterface;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -22,18 +23,16 @@ class AdminController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    public function edit($id)
-    {
-        $user = $this->adminRepo->findOrFail($id);
-
-        return view('admin.user.update', compact('user'));
-    }
-
     public function update(UpdateUserRequest $request, $id)
     {
         try {
             $status = $request->input('status');
-            $this->adminRepo->updateUserStatus($id, $status);
+            $user = $this->adminRepo->updateUserStatus($id, $status);
+            if ($user->status == User::BLOCK) {
+                Alert::alert()->success(trans('me.user_block'), trans('me.successfully'));
+            } else {
+                Alert::alert()->success(trans('me.user_unblock'), trans('me.successfully'));
+            }
         } catch (\Exception $th) {
             return redirect()->back()->with('err', trans('me.update_fail'));
         }

@@ -208,9 +208,9 @@ class AdminPostController extends Controller
         event(new ApprovedNotificationEvent($data, $user->id));
 
         if ($post->status == Post::APPROVED) {
-            Alert::alert()->success('Post Approved', 'Successfully');
+            Alert::alert()->success(trans('me.post_approved'), trans('me.successfully'));
         } else {
-            Alert::alert()->success('Post Rejected', 'Successfully');
+            Alert::alert()->success(trans('me.post_rejected'), trans('me.successfully'));
         }
 
         return redirect()->route('admin.post.approval');

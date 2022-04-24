@@ -52,7 +52,6 @@ Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'AdminController@index')->name('index');
-    Route::get('/update/{id}', 'AdminController@edit')->name('edit');
     Route::put('/update/{id}', 'AdminController@update')->name('update');
     Route::prefix('/post')->name('post.')->group(function () {
         Route::get('/', 'AdminPostController@index')->name('index');
