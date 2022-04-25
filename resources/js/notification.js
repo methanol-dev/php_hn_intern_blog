@@ -32,17 +32,17 @@ $(document).ready(function () {
 
         let notificationBox = `
         <a href="/post/show/${data.message.id}">
-                                <li class="notification-box bg-gray box-noti" data-id="${data.message.notification_id}">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-sm-12 col-12">
-                                            <div>
-                                                ${trans('me.post') + ' ' + data.message.title + ' ' + trans('me.has_been') + ' ' + status}
-                                            </div>
-                                            <small class="text-warning">${trans('me.recent')}</small>
-                                        </div>
-                                    </div>
-                                </li>
-                            </a>`;
+            <li class="notification-box box-noti bg-gray" data-id="${data.message.notification_id}">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                        <div class="box">
+                            ${trans('me.post') + ' ' + data.message.title + ' ' + trans('me.has_been') + ' ' + status}
+                        </div>
+                        <small class="text-warning box">${trans('me.recent')}</small>
+                    </div>
+                </div>
+            </li>
+        </a>`;
         $("#show-notification").prepend(notificationBox);
     });
 
