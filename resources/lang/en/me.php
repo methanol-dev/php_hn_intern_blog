@@ -59,4 +59,9 @@ return [
     'recent' => 'Recent',
     'has_been' => 'has been',
     'mark_all_as_read' => 'Mark all as read',
+    'post_approved' => 'Post Approved',
+    'post_rejected' => 'Post Rejected',
+    'user_block' => 'User Block',
+    'user_unblock' => 'User Unblock',
+    'successfully' => 'Successfully',
 ];

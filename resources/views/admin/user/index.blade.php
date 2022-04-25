@@ -45,7 +45,26 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->role->name }}</td>
                                         <td>{{ $user->status ? trans('me.block') : trans('me.un_block') }}</td>
-                                        <td><a href="{{ Route('admin.edit', ['id' => $user->id]) }}"><i class="fa fa-pen"></i></a></td>
+                                        <td>
+                                            <form action="{{ route('admin.update', ['id' => $user->id]) }}" method="post"
+                                                class="d-inline" onsubmit="return confirm('{{ trans('me.block') }}?')">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" value="{{ config('constants.block') }}" name="status">
+                                                <button class="btn btn-success m-2" id="block-{{ $user->id }}">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.update', ['id' => $user->id]) }}" method="post"
+                                                class="d-inline" onsubmit="return confirm('{{ trans('me.un_block') }}?')">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" value="{{ config('constants.unblock') }}" name="status">
+                                                <button class="btn btn-danger m-2" id="unblock-{{ $user->id }}">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
