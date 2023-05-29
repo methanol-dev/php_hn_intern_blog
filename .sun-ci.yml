@@ -1,72 +1,52 @@
-workspace: true
+name: run-tests
 
-stages:
-  - build
-  - test
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
 
 jobs:
-- name: build
-  stage: build
-  image: sunasteriskrnd/php-workspace:7.4
-  services:
-    - image: mysql:5.7
-      name: mysql_test
-      environment:
-         MYSQL_DATABASE: mysql
-         MYSQL_USER: user_test
-         MYSQL_PASSWORD: password_test
-         MYSQL_ROOT_PASSWORD: root
-  environment:
-    APP_ENV: testing
-  cache:
-  - key: composer_vendor_$CI_BRANCH
-    paths:
-      - vendor
-  before_script:
-  - cp .env.example .env.testing
-  - composer install
-  - php artisan key:generate
-  - php artisan migrate
-  - php artisan config:cache
-  - php artisan config:clear
-  - php artisan cache:clear
-  script:
-  - composer install
-  after_script:
-  - echo "Finish job"
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.0,8.1,8.2]
+        laravel: [9.*,10.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 9.*
+            testbench: ^7.0
+          - laravel: 10.*
+            testbench: ^8.0
+        exclude:
+          - laravel: 10.*
+            php: 8.0
 
-- name: test:node
-  stage: test
-  image: node:12-alpine
-  script:
-  - npm install
-  - npm run dev
-  cache:
-  - key: node_modules_$CI_BRANCH
-    paths:
-      - node_modules
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
-- name: test:phpcs
-  stage: test
-  image: sunasteriskrnd/php-workspace:7.4
-  before_script:
-  - composer global require "squizlabs/php_codesniffer=*"
-  - composer install
-  script:
-  - ~/.composer/vendor/bin/phpcs --ignore=vendor,bootstrap/cache/,storage,database,coverage,public,resources,node_modules --standard=PSR2,PSR1 ./
-  - ~/.composer/vendor/bin/phpcs --standard=PSR2,PSR1 resources/lang
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-- name: test:phpunit
-  stage: test
-  image: sunasteriskrnd/php-workspace:7.4
-  before_script:
-  - composer install
-  script:
-    - vendor/bin/phpunit --coverage-clover ./coverage.xml --coverage-html=coverage
-  coverage:
-    type: clover
-    path: coverage.xml
-  artifacts:
-    paths:
-    - coverage
-    expires_in: 3 days
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
